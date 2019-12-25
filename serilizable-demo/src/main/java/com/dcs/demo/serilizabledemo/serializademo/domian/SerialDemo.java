@@ -3,6 +3,7 @@ package com.dcs.demo.serilizabledemo.serializademo.domian;
 import com.dcs.demo.serilizabledemo.entity.User;
 import com.dcs.demo.serilizabledemo.serializademo.service.SerializaService;
 import com.dcs.demo.serilizabledemo.serializademo.service.impl.JavaSerializaServiceImpl;
+import com.dcs.demo.serilizabledemo.serializademo.service.impl.JavaSerializerWithFileServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,18 +17,21 @@ public class SerialDemo {
     static Map<String,SerializaService> map = new HashMap<>(8);
     static {
         map.put("jdkSerializa",new JavaSerializaServiceImpl());
+        map.put("writeFile",new JavaSerializerWithFileServiceImpl());
 
 
 
     }
 
     public static void main(String[] args) {
-        SerializaService jdkSerializa = map.get("jdkSerializa");
+//        SerializaService entity = map.get("jdkSerializa");
+
+        SerializaService entity = map.get("writeFile");
 
         User user = new User("pipi",1);
-        byte[] data = jdkSerializa.serialize(user);
+        byte[] data = entity.serialize(user);
         System.out.println(data.length);
-        User res = jdkSerializa.deSerialize(data, User.class);
+        User res = entity.deSerialize(data, User.class);
         System.out.println(res);
 
 
