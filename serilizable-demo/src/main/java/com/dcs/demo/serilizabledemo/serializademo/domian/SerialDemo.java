@@ -13,7 +13,7 @@ import java.util.Map;
  * @date 2019/12/24
  */
 public class SerialDemo {
-    static Map<String,Object> map = new HashMap<>(8);
+    static Map<String,SerializaService> map = new HashMap<>(8);
     static {
         map.put("jdkSerializa",new JavaSerializaServiceImpl());
 
@@ -22,7 +22,7 @@ public class SerialDemo {
     }
 
     public static void main(String[] args) {
-        SerializaService jdkSerializa = (SerializaService) map.get("jdkSerializa");
+        SerializaService jdkSerializa = map.get("jdkSerializa");
 
         User user = new User("pipi",1);
         byte[] data = jdkSerializa.serialize(user);
