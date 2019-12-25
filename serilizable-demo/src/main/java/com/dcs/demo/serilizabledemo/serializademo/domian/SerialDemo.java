@@ -2,6 +2,7 @@ package com.dcs.demo.serilizabledemo.serializademo.domian;
 
 import com.dcs.demo.serilizabledemo.entity.User;
 import com.dcs.demo.serilizabledemo.serializademo.service.SerializaService;
+import com.dcs.demo.serilizabledemo.serializademo.service.impl.FastJsonSerializaServiceImpl;
 import com.dcs.demo.serilizabledemo.serializademo.service.impl.JavaSerializaServiceImpl;
 import com.dcs.demo.serilizabledemo.serializademo.service.impl.JavaSerializerWithFileServiceImpl;
 import com.dcs.demo.serilizabledemo.serializademo.service.impl.XmlSerializaServiceImpl;
@@ -15,12 +16,13 @@ import java.util.Map;
  * @date 2019/12/24
  */
 public class SerialDemo {
-    static Map<String,SerializaService> map = new HashMap<>(8);
-    static {
-        map.put("jdkSerializa",new JavaSerializaServiceImpl());
-        map.put("writeFile",new JavaSerializerWithFileServiceImpl());
-        map.put("xml",new XmlSerializaServiceImpl());
+    static Map<String, SerializaService> map = new HashMap<>(8);
 
+    static {
+        map.put("jdkSerializa", new JavaSerializaServiceImpl());
+        map.put("writeFile", new JavaSerializerWithFileServiceImpl());
+        map.put("xml", new XmlSerializaServiceImpl());
+        map.put("fastJson", new FastJsonSerializaServiceImpl());
 
 
     }
@@ -30,9 +32,10 @@ public class SerialDemo {
 
 //        SerializaService entity = map.get("writeFile");
 
-        SerializaService entity = map.get("xml");
+//        SerializaService entity = map.get("xml");
+        SerializaService entity = map.get("fastJson");
 
-        User user = new User("pipi",1);
+        User user = new User("pipi", 1);
         byte[] data = entity.serialize(user);
         System.out.println(data.length);
         //打印xml
