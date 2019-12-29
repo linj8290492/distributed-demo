@@ -2,10 +2,7 @@ package com.dcs.demo.serilizabledemo.serializademo.domian;
 
 import com.dcs.demo.serilizabledemo.entity.User;
 import com.dcs.demo.serilizabledemo.serializademo.service.SerializaService;
-import com.dcs.demo.serilizabledemo.serializademo.service.impl.FastJsonSerializaServiceImpl;
-import com.dcs.demo.serilizabledemo.serializademo.service.impl.JavaSerializaServiceImpl;
-import com.dcs.demo.serilizabledemo.serializademo.service.impl.JavaSerializerWithFileServiceImpl;
-import com.dcs.demo.serilizabledemo.serializademo.service.impl.XmlSerializaServiceImpl;
+import com.dcs.demo.serilizabledemo.serializademo.service.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +20,7 @@ public class SerialDemo {
         map.put("writeFile", new JavaSerializerWithFileServiceImpl());
         map.put("xml", new XmlSerializaServiceImpl());
         map.put("fastJson", new FastJsonSerializaServiceImpl());
+        map.put("hessian", new HessianSerializaServiceImpl());
 
 
     }
@@ -33,7 +31,8 @@ public class SerialDemo {
 //        SerializaService entity = map.get("writeFile");
 
 //        SerializaService entity = map.get("xml");
-        SerializaService entity = map.get("fastJson");
+//        SerializaService entity = map.get("fastJson");
+        SerializaService entity = map.get("hessian");
 
         User user = new User("pipi", 1);
         byte[] data = entity.serialize(user);
